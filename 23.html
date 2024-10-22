@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>(название)</title>
+<style>
+  .button-container {
+    position: relative;
+    height: 100vh;
+    text-align: center; /* Центрируем текст по горизонтали */
+  }
+
+  /* Позиционирование кнопок */
+  .btn1 {
+    position: absolute;
+    top: 70%;
+    left: 30%;
+  }
+
+  .btn2 {
+    position: absolute;
+    top: 70%;
+    left: 55%;
+  }
+
+  .btn3 {
+    position: absolute;
+    top: 40%;
+    left: 55%;
+  }
+
+  .btn4 {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+  }
+
+  /* Стили для блока с результатами */
+  #chatBox {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-60%);
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Изначально скрыто */
+  }
+
+  /* Скрытие кнопок */
+  .hidden {
+    display: none;
+  }
+
+  /* Стили для кнопок */
+  button {
+    padding: 10px 20px;
+    font-size: 40px;
+    cursor: pointer;
+  }
+
+  /* Стили для вопроса */
+  #question {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="button-container">
+  <div class="btn5" id="question">Какая кнопка верная?</div> <!-- Вопрос -->
+  <button class="btn1" onclick="handleClick(true)">Кнопка 1</button>
+  <button class="btn2" onclick="handleClick(false)">Кнопка 2</button>
+  <button class="btn3" onclick="handleClick(false)">Кнопка 3</button>
+  <button class="btn4" onclick="handleClick(false)">Кнопка 4</button>
+
+  <div id="chatBox"></div>
+
+<script>
+function handleClick(isCorrect) {
+    // Скрываем все кнопки
+    document.querySelector('.btn1').classList.add('hidden');
+    document.querySelector('.btn2').classList.add('hidden');
+    document.querySelector('.btn3').classList.add('hidden');
+    document.querySelector('.btn4').classList.add('hidden');
+	document.querySelector('.btn5').classList.add('hidden');
+    
+    // Показать сообщение "Верно" или "Неверно"
+    var chatBox = document.getElementById("chatBox");
+    chatBox.style.display = "block";
+    chatBox.innerHTML = isCorrect ? "Верно" : "Неверно";
+
+    // Задержка в 2 секунды для исчезновения сообщения и дальнейших действий
+    setTimeout(function() {
+        // Если ответ верный, показать "Привет"
+        if (isCorrect) {
+            chatBox.innerHTML = "Привет";
+        } else {
+            chatBox.style.display = "none"; // Убрать текст, если неверно
+        }
+        
+        // Задержка в 2 секунды для возвращения кнопок
+        setTimeout(function() {
+            // Показать кнопки снова
+            document.querySelector('.btn1').classList.remove('hidden');
+            document.querySelector('.btn2').classList.remove('hidden');
+            document.querySelector('.btn3').classList.remove('hidden');
+            document.querySelector('.btn4').classList.remove('hidden');
+			document.querySelector('.btn5').classList.remove('hidden');
+
+            // Скрыть сообщение
+            chatBox.style.display = "none";
+        }, 2000); // 2 секунды до появления кнопок
+    }, 2000); // 2 секунды на показ "Верно" или "Неверно"
+}
+</script>
+
+</body>
+</html>
+
